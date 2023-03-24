@@ -1,0 +1,14 @@
+{
+  "name": "shadowdao-backend",
+  "version": "1.0.0",
+  "description": "A Private DAO using Zk proofs (Polygon ID)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hardhat": "^2.13.0"
+  }
+}
