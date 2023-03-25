@@ -3,13 +3,13 @@ require('@nomiclabs/hardhat-waffle');
 
 async function main() {
   
-  const verifierContract = "DAOVerifier";
+  const verifierContract = "ShadowDAO";
 
-  const DAOVerifier = await ethers.getContractFactory(verifierContract);
-  const daoVerifier = await DAOVerifier.deploy();
+  const ShadowDAO = await ethers.getContractFactory(verifierContract);
+  const shadowDAO = await ShadowDAO.deploy();
   console.log("Deploying......")
-  await daoVerifier.deployed();
-  console.log("Contract Deployed at:", daoVerifier.address);
+  await shadowDAO.deployed();
+  console.log("Contract Deployed at:", shadowDAO.address);
 }
 main()
   .then(() => process.exit(0))

@@ -8,7 +8,7 @@ import "./verifiers/ZKPVerifier.sol";
 contract ShadowDAO is ZKPVerifier {
 
     // ********** DAO CONTRACT CODE **********88
-    // ** Satte Variables
+    // ** State Variables
     uint256 public proposalId = 1;
     address public DAOowner;
 
@@ -40,11 +40,6 @@ contract ShadowDAO is ZKPVerifier {
     // ? Addresses of User's who have identified themselves
     mapping(address => bool) public isMember;
 
-    // * Registered Users
-    mapping(uint256 => bool) public IdToRegistered;
-    mapping(uint256 => address) public IdToAddress;
-
-    mapping(address => uint256) public addressToId;
 
     
     // ** EVENTS
@@ -217,6 +212,13 @@ contract ShadowDAO is ZKPVerifier {
     // ? Distinguish b/w different type of Query Requests
     uint64 public constant MEMBER_REQUEST_ID = 1;
     uint64 public constant OWNER_REQUEST_ID = 2;
+
+    // * Mapping Registered Users
+    mapping(uint256 => bool) public IdToRegistered;
+    mapping(uint256 => address) public IdToAddress;
+
+    mapping(address => uint256) public addressToId;
+
 
     // * Polygon ID FUNCTIONS
 
