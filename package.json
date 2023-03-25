@@ -13,6 +13,13 @@
   },
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
-    "@nomiclabs/hardhat-etherscan": "^3.0.1"
+    "@nomiclabs/hardhat-etherscan": "^3.0.1",
+    "dotenv": "^16.0.3",
+    "@openzeppelin/contracts": "^4.7.3",
+    "@typechain/hardhat": "^6.1.2",
+    "chai": "^4.2.0",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-bytes-utils": "^0.8.0",
+    "solidity-coverage": "^0.8.0"
   }
 }
