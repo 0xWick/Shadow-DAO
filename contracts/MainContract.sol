@@ -12,6 +12,11 @@ contract ShadowDAO is ZKPVerifier {
     uint256 public proposalId = 1;
     address public DAOowner;
 
+
+    constructor () {
+        DAOowner = msg.sender;
+    }
+
     // ** Structs
     // ** Proposal Struct
     struct proposal{
