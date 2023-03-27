@@ -6,7 +6,20 @@ require("@nomiclabs/hardhat-ethers");
 require("@nomiclabs/hardhat-etherscan");
 
 module.exports = {
-        solidity: "0.8.0",
+        solidity: {  compilers: [
+         {
+           version: "0.8.15",
+         },
+         {
+           version: "0.8.0",
+         },
+         {
+           version: "0.8.2",
+         },
+         {
+           version: "0.6.11",
+         },
+       ],},
         defaultNetwork: "mumbai",
         networks: {
             hardhat: {},
