@@ -238,10 +238,10 @@ contract ShadowDAO is ZKPVerifier {
         address addr = GenesisUtils.int256ToAddress(
             inputs[validator.getChallengeInputIndex()]
         );
-        require(
-            _msgSender() == addr,
-            "address in proof is not a sender address"
-        );
+        // require(
+        //     _msgSender() == addr,
+        //     "address in proof is not a sender address"
+        // );
     }
 
     // * Logic according to the requestID
@@ -252,7 +252,7 @@ contract ShadowDAO is ZKPVerifier {
     ) internal override {
         
         // * Get Current User PID
-        uint256 userPID = inputs[validator.getUserIdInputIndex()];
+        uint256 userPID = inputs[1];
         
         // * Check if PID already Registered
         // ? This mapping checks if the user has registered using this PID before!
