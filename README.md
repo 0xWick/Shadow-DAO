@@ -1,56 +1,49 @@
+# Step 1: Download the PolygonId app & Get your claims from these links
 
-# Live DApp Link: https://polygon-id-frontend.vercel.app/
+` Note: One PolygonID's Address can register only one Metamask Address
+Also, One Address can either be a Member or an Owner `
 
-## `Here for the verification Lifecycle: `
+## `ProofSchemas (created using Demo Verifier): https://github.com/0xWick/proof-schemas (for reference)`
+![image](https://user-images.githubusercontent.com/69587947/227929142-6cea0a81-de7b-4198-a56b-825fdc8744d8.png)
 
-### `Shadow DAO`
+## Scan to add Claim to the wallet (https://issuer-demo.polygonid.me/offer?id=a32061d5-cc92-11ed-8e4f-0242c0a88005&schema=ProofOfDaoMembership)
 
--> Member creates a Proposal and present it to the DAO
--> DAO members vote for/against on the proposal
--> After the Deadline for voting has passed, the OWNER can countVotes and end the proposal
--> If Passed: The Required Amount is transfered to the Proposer. And if Rejected: Proposer get's nothing
+![image](https://user-images.githubusercontent.com/69587947/227929326-a0e38e82-1000-4229-93a3-063ca4d27dfd.png)
 
-## Things to Try
+## `Now you have received the claim in your wallet, you have to verify your identity to the smart contract.`
 
-### `You can:`
+<img src="https://user-images.githubusercontent.com/69587947/227938881-bd65c905-7bef-4c70-b7c1-bb416b4f5415.jpg" width="200" height="500"/>
 
--> Create Proposals
-![image](https://user-images.githubusercontent.com/69587947/227927145-6e5d4cd3-7024-4249-9d44-99e501bbc295.png)
+# Step 2: Verify your identity using Polygon ID zero-knowledge claim solution
 
--> Vote on Proposals
-![image](https://user-images.githubusercontent.com/69587947/227927923-89613f9a-b4c2-46af-8086-39e58edffc99.png)
+Go to our Website: https://polygon-id-frontend.vercel.app/
 
--> Donate to the DAO
-![image](https://user-images.githubusercontent.com/69587947/227927355-c300484e-4805-44ed-8a75-100f7034cdf1.png)
+i) Click on `"Please Verify"` (Owner Account for Judges:
+"privateKey: ce7c6c3d9592c160d572bb964b82b93d14754d54953053e97f0c7f42c5fd1---")
+\
+Note: Add "d2c" at the "---" in the Private key (to avoid scrapers, also its a test account)
 
-### `Only Owner:`
+Import in Metamask and interact with the Dapp as the Owner!
 
-1. All the above, and
-2. Count Votes (Change the Proposal Status to Rejected/Passed)
-![image](https://user-images.githubusercontent.com/69587947/227927454-507f0d61-9ece-4176-8988-bdb24239a759.png)
-![image](https://user-images.githubusercontent.com/69587947/227927815-08f55775-9edf-45fb-be70-9228fae76ef9.png)
+![image](https://user-images.githubusercontent.com/69587947/208848622-b9c881f0-1acd-455e-ae51-a949a778b781.png)
 
-### DAO transfered the "Required Amount" to the Proposer
-![image](https://user-images.githubusercontent.com/69587947/227928076-1f6ee474-2695-4ecc-b8b5-ca45111355a2.png)
+ii) `Scan the QR Code` from your Mobile App
 
-# `3. Owner Also gets an Owner Panel`
+![image](https://user-images.githubusercontent.com/69587947/227931342-8432005d-0341-4e23-8878-e3feb5a04f56.png)
 
-### Owner Panel:
-![image](https://user-images.githubusercontent.com/69587947/227928196-f8cf1f22-fefd-46cf-b356-d098b3bcb7d5.png)
+### `-> Follow the Prompts and you will be verified after the Transaction from your Metamask`
 
-1. A `"Withdraw"` button for withdrawing all funds in the DAO (A multisig can be added for security but since we have the ID of the Owner its not an issue)
+<img src="https://user-images.githubusercontent.com/69587947/227938899-244133c6-17b1-4a45-b46f-8c9de97aaa41.jpg" width="200" height="500"/>
 
-2. `"Issue New Membership"` , Enter a User's PID(in uint256, you can find it in the Event Logs named "userRegistered" Event) with which the user registered an Eth Address. And "Remove" both (PID & Eth Address) from already registered. Hence, issuing a New Membership because that PID can now register a new Eth Address.
+<img src="https://user-images.githubusercontent.com/69587947/227938907-3224a1f8-3706-46a7-a85c-30a783cd3606.jpg" width="200" height="500"/>
 
-3. `"Revoke Membership"` , Enter an Eth Address to kick him from the DAO's verified Members. Since, the PID is not removed from the registered PID's. This user can't register a new Eth Address.
+<img src="https://user-images.githubusercontent.com/69587947/227938894-061dcf9f-7aca-4464-9077-65e73ae42d52.jpg" width="200" height="500"/>
 
-## Verification Checks
+<img src="https://user-images.githubusercontent.com/69587947/227938913-d24e781d-e457-4507-9359-0505c631e626.jpg" width="200" height="500"/>
 
-1. One PID can't register more than one Eth Address (unless issued a New Membership)
-![image](https://user-images.githubusercontent.com/69587947/208858843-0b5aa396-fa01-4794-93ce-82d73de2bec1.png)
 
-2. If someone else tries to issue a NewMembership
-![image](https://user-images.githubusercontent.com/69587947/208859500-20f1d19d-3372-499c-ae69-dc23852076a7.png)
+# Congrats, You are Verified: (Import the Metamask wallet from Mobile to the PC for Interacting with the Live Website)
 
-3. Duplicate Registration Check
-![image](https://user-images.githubusercontent.com/69587947/208859716-030c555d-aebb-411a-ad11-1cdffc526b4d.png)
+Now, you can interact with the DAO (Create Proposals, Vote on Proposals etc.)
+
+![image](https://user-images.githubusercontent.com/69587947/227940083-1cd18d70-9d7c-4ab5-ab77-67588003bf10.png)
