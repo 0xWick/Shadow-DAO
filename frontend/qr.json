@@ -1,0 +1,32 @@
+{
+    "id":"c811849d-6bfb-4d85-936e-3d9759c7f105",
+    "typ":"application/iden3comm-plain-json",
+    "type":"https://iden3-communication.io/proofs/1.0/contract-invoke-request",
+    "body":{
+        "transaction_data":{
+            "contract_address":"0xaBcD4bA2110dD1AF923Dbb6AAc9aBCAE242A4ca4", // add your deployed contract here!
+            "method_id":"b68967e2",
+            "chain_id":80001,
+            "network":"polygon-mumbai"
+            },
+        "reason":"DAO Verification",
+        "scope":[{
+            "id":1,
+            "circuit_id":"credentialAtomicQuerySig",
+            "rules":{
+                "query":{
+                    "allowed_issuers":["*"],
+                    "req":{ // to be modified according to your query
+                        "birthday":{
+                            "$lt":20020101
+                            }
+                        },
+                    "schema":{
+                            "url":"https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v2.json-ld", // to be modified according to your url schema (you find it on Polygon ID Platform)
+                            "type":"KYCAgeCredential" // to be modified according to your credential type (you find it on Polygon ID Platform)
+                            }
+                        }
+                    }
+                }]
+            }
+}
