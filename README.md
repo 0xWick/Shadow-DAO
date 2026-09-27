@@ -1,49 +1,59 @@
-# Step 1: Download the PolygonId app & Get your claims from these links
+# Shadow DAO
 
-` Note: One PolygonID's Address can register only one Metamask Address
-Also, One Address can either be a Member or an Owner `
+A private DAO where membership is proven with **zero-knowledge proofs**. Members show the contract that they hold a valid membership credential, using Polygon ID, without revealing who they are. Each real identity can register exactly one wallet, so the DAO is sybil-resistant without collecting anyone's personal data.
 
-## `ProofSchemas (created using Demo Verifier): https://github.com/0xWick/proof-schemas (for reference)`
-![image](https://user-images.githubusercontent.com/69587947/227929142-6cea0a81-de7b-4198-a56b-825fdc8744d8.png)
+**Live app:** [polygon-id-frontend.vercel.app](https://polygon-id-frontend.vercel.app/) · **Frontend:** [shadow-dao-frontend](https://github.com/0xWick/shadow-dao-frontend) · **Credential schemas:** [proof-schemas](https://github.com/0xWick/proof-schemas)
 
-## Scan to add Claim to the wallet (https://issuer-demo.polygonid.me/offer?id=a32061d5-cc92-11ed-8e4f-0242c0a88005&schema=ProofOfDaoMembership)
+![Shadow DAO](https://user-images.githubusercontent.com/69587947/227940083-1cd18d70-9d7c-4ab5-ab77-67588003bf10.png)
 
-![image](https://user-images.githubusercontent.com/69587947/227929326-a0e38e82-1000-4229-93a3-063ca4d27dfd.png)
+## How it works
 
-## `Now you have received the claim in your wallet, you have to verify your identity to the smart contract.`
+```mermaid
+sequenceDiagram
+  participant I as Credential issuer
+  participant W as Polygon ID wallet
+  participant F as DAO frontend
+  participant C as ShadowDAO contract
+  I->>W: ProofOfDaoMembership claim
+  F->>W: proof request (QR code)
+  W->>C: zero-knowledge proof
+  C->>C: verify on-chain, register one wallet per identity
+  Note over C: member can now propose and vote
+```
 
-<img src="https://user-images.githubusercontent.com/69587947/227938881-bd65c905-7bef-4c70-b7c1-bb416b4f5415.jpg" width="200" height="500"/>
+1. **Get a credential.** A member receives a `ProofOfDaoMembership` claim from the issuer into their Polygon ID wallet. The owner gets an owner claim the same way.
+2. **Prove it.** The frontend shows a QR code with a proof request. The wallet generates a zero-knowledge proof that it holds the claim, and submits it to the contract.
+3. **Verify on-chain.** `ShadowDAO` inherits Polygon ID's `ZKPVerifier`, and checks the proof with the credential-query validators (signature and Merkle-tree-proof circuits). Only the proof is verified; the contract never sees the credential's contents.
+4. **One identity, one wallet.** The contract records the identity's public id against the wallet, so the same person can't register a second address. The owner can revoke a membership, or clear an identity so it can re-register with a new wallet.
+5. **Govern.** Anyone can donate to the treasury. Verified members create proposals, with a description and the amount they need, and vote once each within a 500-block window. After the deadline, the owner counts the votes, and a passed proposal is paid from the treasury to its proposer.
 
-# Step 2: Verify your identity using Polygon ID zero-knowledge claim solution
+Two request ids keep the roles apart: `MEMBER_REQUEST_ID` registers members, and `OWNER_REQUEST_ID` hands ownership to whoever proves the owner credential.
 
-Go to our Website: https://polygon-id-frontend.vercel.app/
+## Verifying in the app
 
-i) Click on `"Please Verify"` (Owner Account for Judges:
-"privateKey: ce7c6c3d9592c160d572bb964b82b93d14754d54953053e97f0c7f42c5fd1---")
-\
-Note: Add "d2c" at the "---" in the Private key (to avoid scrapers, also its a test account)
+| 1. Scan the proof request | 2. Approve in the wallet | 3. Verified |
+|---|---|---|
+| <img src="https://user-images.githubusercontent.com/69587947/227931342-8432005d-0341-4e23-8878-e3feb5a04f56.png" width="260"/> | <img src="https://user-images.githubusercontent.com/69587947/227938899-244133c6-17b1-4a45-b46f-8c9de97aaa41.jpg" width="160"/> | <img src="https://user-images.githubusercontent.com/69587947/227938913-d24e781d-e457-4507-9359-0505c631e626.jpg" width="160"/> |
 
-Import in Metamask and interact with the Dapp as the Owner!
+## Contracts
 
-![image](https://user-images.githubusercontent.com/69587947/208848622-b9c881f0-1acd-455e-ae51-a949a778b781.png)
+| File | |
+|---|---|
+| [`contracts/MainContract.sol`](contracts/MainContract.sol) | The DAO: treasury, proposals, voting, membership, and the proof hooks (`_beforeProofSubmit`, `_afterProofSubmit`) |
+| [`contracts/verifiers/ZKPVerifier.sol`](contracts/verifiers/ZKPVerifier.sol) | Polygon ID's on-chain proof verifier and request registry |
+| [`contracts/validators/`](contracts/validators) | Credential atomic query validators for the signature and MTP circuits |
+| [`contracts/lib/`](contracts/lib) | Poseidon hashing and genesis-state utilities from iden3 |
 
-ii) `Scan the QR Code` from your Mobile App
+## Tech
 
-![image](https://user-images.githubusercontent.com/69587947/227931342-8432005d-0341-4e23-8878-e3feb5a04f56.png)
+Solidity · Hardhat · Polygon ID (iden3 circuits, on-chain ZK verification) · Polygon Mumbai · React frontend with wagmi and RainbowKit
 
-### `-> Follow the Prompts and you will be verified after the Transaction from your Metamask`
+## Run it
 
-<img src="https://user-images.githubusercontent.com/69587947/227938899-244133c6-17b1-4a45-b46f-8c9de97aaa41.jpg" width="200" height="500"/>
+```bash
+npm install
+npx hardhat compile
+npx hardhat run scripts/deploy.js --network mumbai
+```
 
-<img src="https://user-images.githubusercontent.com/69587947/227938907-3224a1f8-3706-46a7-a85c-30a783cd3606.jpg" width="200" height="500"/>
-
-<img src="https://user-images.githubusercontent.com/69587947/227938894-061dcf9f-7aca-4464-9077-65e73ae42d52.jpg" width="200" height="500"/>
-
-<img src="https://user-images.githubusercontent.com/69587947/227938913-d24e781d-e457-4507-9359-0505c631e626.jpg" width="200" height="500"/>
-
-
-# Congrats, You are Verified: (Import the Metamask wallet from Mobile to the PC for Interacting with the Live Website)
-
-Now, you can interact with the DAO (Create Proposals, Vote on Proposals etc.)
-
-![image](https://user-images.githubusercontent.com/69587947/227940083-1cd18d70-9d7c-4ab5-ab77-67588003bf10.png)
+After deploying, set the proof requests on the contract (`setZKPRequest`) with the validator address and the schema from [proof-schemas](https://github.com/0xWick/proof-schemas).
