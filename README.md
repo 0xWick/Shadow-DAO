@@ -2,7 +2,7 @@
 
 A private DAO where membership is proven with **zero-knowledge proofs**. Members show the contract that they hold a valid membership credential, using Polygon ID, without revealing who they are. Each real identity can register exactly one wallet, so the DAO is sybil-resistant without collecting anyone's personal data.
 
-**Live app:** [polygon-id-frontend.vercel.app](https://polygon-id-frontend.vercel.app/) · **Frontend:** [shadow-dao-frontend](https://github.com/0xWick/shadow-dao-frontend) · **Credential schemas:** [proof-schemas](https://github.com/0xWick/proof-schemas)
+**Live app:** [polygon-id-frontend.vercel.app](https://polygon-id-frontend.vercel.app/) · **Frontend:** [`frontend/`](frontend) · **Credential schemas:** [`schemas/`](schemas)
 
 ![Shadow DAO](https://user-images.githubusercontent.com/69587947/227940083-1cd18d70-9d7c-4ab5-ab77-67588003bf10.png)
 
@@ -35,6 +35,15 @@ Two request ids keep the roles apart: `MEMBER_REQUEST_ID` registers members, and
 |---|---|---|
 | <img src="https://user-images.githubusercontent.com/69587947/227931342-8432005d-0341-4e23-8878-e3feb5a04f56.png" width="260"/> | <img src="https://user-images.githubusercontent.com/69587947/227938899-244133c6-17b1-4a45-b46f-8c9de97aaa41.jpg" width="160"/> | <img src="https://user-images.githubusercontent.com/69587947/227938913-d24e781d-e457-4507-9359-0505c631e626.jpg" width="160"/> |
 
+## Repository
+
+| Folder | |
+|---|---|
+| [`contracts/`](contracts) | The DAO contract, Polygon ID's verifier and validators, and iden3 libraries (Hardhat project at the root) |
+| [`frontend/`](frontend) | The React app: wallet connection, QR proof requests, proposals, voting, treasury, owner console |
+| [`schemas/`](schemas) | The `ProofOfDaoMembership` and `ProofOfDaoOwnership` credential schemas (JSON and JSON-LD) |
+| [`scripts/`](scripts) | Deployment and verification scripts |
+
 ## Contracts
 
 | File | |
@@ -54,6 +63,8 @@ Solidity · Hardhat · Polygon ID (iden3 circuits, on-chain ZK verification) · 
 npm install
 npx hardhat compile
 npx hardhat run scripts/deploy.js --network mumbai
+
+cd frontend && npm install && npm start    # the app, http://localhost:3000
 ```
 
-After deploying, set the proof requests on the contract (`setZKPRequest`) with the validator address and the schema from [proof-schemas](https://github.com/0xWick/proof-schemas).
+After deploying, set the proof requests on the contract (`setZKPRequest`) with the validator address and a schema from [`schemas/`](schemas).

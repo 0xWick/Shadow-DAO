@@ -1,8 +1,8 @@
 # Shadow DAO: frontend
 
-The web app for [Shadow DAO](https://github.com/0xWick/Shadow-DAO), a private DAO where membership is proven with zero-knowledge proofs through Polygon ID.
+The web app for [Shadow DAO](..), a private DAO where membership is proven with zero-knowledge proofs through Polygon ID.
 
-**Live app:** [polygon-id-frontend.vercel.app](https://polygon-id-frontend.vercel.app/) · **Contracts:** [Shadow-DAO](https://github.com/0xWick/Shadow-DAO)
+**Live app:** [polygon-id-frontend.vercel.app](https://polygon-id-frontend.vercel.app/) · **Contracts:** [`../contracts`](../contracts)
 
 ![Shadow DAO](https://user-images.githubusercontent.com/69587947/227940083-1cd18d70-9d7c-4ab5-ab77-67588003bf10.png)
 
