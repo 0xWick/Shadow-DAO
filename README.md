@@ -1,56 +1,37 @@
+# Shadow DAO: frontend
 
-# Live DApp Link: https://polygon-id-frontend.vercel.app/
-## Smart contracts: https://github.com/0xWick/Shadow-DAO/tree/main/contracts
-## `ZK proof Verification Lifecyle:`https://github.com/0xWick/Shadow-DAO/blob/main/README.md
+The web app for [Shadow DAO](https://github.com/0xWick/Shadow-DAO), a private DAO where membership is proven with zero-knowledge proofs through Polygon ID.
 
-### `Shadow DAO`
+**Live app:** [polygon-id-frontend.vercel.app](https://polygon-id-frontend.vercel.app/) · **Contracts:** [Shadow-DAO](https://github.com/0xWick/Shadow-DAO)
 
--> Member creates a Proposal and present it to the DAO
--> DAO members vote for/against on the proposal
--> After the Deadline for voting has passed, the OWNER can countVotes and end the proposal
--> If Passed: The Required Amount is transfered to the Proposer. And if Rejected: Proposer get's nothing
+![Shadow DAO](https://user-images.githubusercontent.com/69587947/227940083-1cd18d70-9d7c-4ab5-ab77-67588003bf10.png)
 
-## Things to Try
+## What it does
 
-### `You can:`
+- **Connect.** Wallet connection with RainbowKit and wagmi, on Polygon Mumbai.
+- **Verify.** Shows a QR code carrying the contract's proof request. Scanning it with the Polygon ID wallet sends a zero-knowledge proof of membership straight to the contract, and the app picks up the verified status.
+- **Proposals.** Verified members create proposals with a description and the amount they need, see every proposal with its live vote count and deadline, and vote for or against once each.
+- **Treasury.** Anyone can donate. The DAO balance is shown live.
+- **Owner console.** The owner verifies with their own credential, counts votes once a proposal's deadline passes (which pays out passed proposals), and can revoke or reset memberships.
 
--> Create Proposals
-![image](https://user-images.githubusercontent.com/69587947/227927145-6e5d4cd3-7024-4249-9d44-99e501bbc295.png)
+## Structure
 
--> Vote on Proposals
-![image](https://user-images.githubusercontent.com/69587947/227927923-89613f9a-b4c2-46af-8086-39e58edffc99.png)
+| File | |
+|---|---|
+| `src/pages/Home.js` | Landing page and the verification entry point |
+| `src/pages/QrVerification.js` | Proof-request QR codes for members and the owner |
+| `src/pages/Proposal.js` | Create, browse and vote on proposals |
+| `src/pages/owner.js` | Owner actions: count votes, manage memberships |
+| `src/pages/config.js` | Contract address and ABI |
+| `src/Connect.js`, `src/Navigation.js` | Wallet connection and navigation |
 
--> Donate to the DAO
-![image](https://user-images.githubusercontent.com/69587947/227927355-c300484e-4805-44ed-8a75-100f7034cdf1.png)
+## Tech
 
-### `Only Owner:`
+React · wagmi and RainbowKit · ethers.js · Moralis · qrcode.react · Polygon ID
 
-1. All the above, and
-2. Count Votes (Change the Proposal Status to Rejected/Passed)
-![image](https://user-images.githubusercontent.com/69587947/227927454-507f0d61-9ece-4176-8988-bdb24239a759.png)
-![image](https://user-images.githubusercontent.com/69587947/227927815-08f55775-9edf-45fb-be70-9228fae76ef9.png)
+## Run it
 
-### DAO transfered the "Required Amount" to the Proposer
-![image](https://user-images.githubusercontent.com/69587947/227928076-1f6ee474-2695-4ecc-b8b5-ca45111355a2.png)
-
-# `3. Owner Also gets an Owner Panel`
-
-### Owner Panel:
-![image](https://user-images.githubusercontent.com/69587947/227928196-f8cf1f22-fefd-46cf-b356-d098b3bcb7d5.png)
-
-1. A `"Withdraw"` button for withdrawing all funds in the DAO (A multisig can be added for security but since we have the ID of the Owner its not an issue)
-
-2. `"Issue New Membership"` , Enter a User's PID(in uint256, you can find it in the Event Logs named "userRegistered" Event) with which the user registered an Eth Address. And "Remove" both (PID & Eth Address) from already registered. Hence, issuing a New Membership because that PID can now register a new Eth Address.
-
-3. `"Revoke Membership"` , Enter an Eth Address to kick him from the DAO's verified Members. Since, the PID is not removed from the registered PID's. This user can't register a new Eth Address.
-
-## Verification Checks
-
-1. One PID can't register more than one Eth Address (unless issued a New Membership)
-![image](https://user-images.githubusercontent.com/69587947/208858843-0b5aa396-fa01-4794-93ce-82d73de2bec1.png)
-
-2. If someone else tries to issue a NewMembership
-![image](https://user-images.githubusercontent.com/69587947/208859500-20f1d19d-3372-499c-ae69-dc23852076a7.png)
-
-3. Duplicate Registration Check
-![image](https://user-images.githubusercontent.com/69587947/208859716-030c555d-aebb-411a-ad11-1cdffc526b4d.png)
+```bash
+npm install
+npm start
+```
