@@ -1,0 +1,25 @@
+{
+    "@context": [
+      {
+        "@version": 1.1,
+        "@protected": true,
+        "id": "@id",
+        "type": "@type",
+        "ProofOfDaoMembership": {
+          "@id": "https://raw.githubusercontent.com/0xWick/proof-schemas/main/proof-of-dao-membership.jsonld#ProofOfDaoMembership",
+          "@context": {
+            "@version": 1.1,
+            "@protected": true,
+            "id": "@id",
+            "type": "@type",
+            "vocab": "https://github.com/0xWick/proof-schemas/blob/cadbacad9411ac93d59c48ee57b1b76b4079e5e9/proof-of-dao-membership.md#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "isMember": {
+              "@id": "vocab:isMember",
+              "@type": "xsd:integer"
+            }
+          }
+        }
+      }
+    ]
+  }
